@@ -3,8 +3,6 @@
 import logging
 import zmq
 
-#import prediction_pb2.py
-
 class Base (object):
 	ConnectionURL =   "{protocol}://{hostname}:{port}"
 

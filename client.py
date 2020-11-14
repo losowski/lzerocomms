@@ -4,7 +4,6 @@ import logging
 import zmq
 
 from python.comms import base
-#import prediction_pb2.py
 
 class Client (base.Base):
 	def __init__(self, hostname, port):

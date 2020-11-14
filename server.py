@@ -6,7 +6,6 @@ import threading
 import zmq
 
 from python.comms import base
-#import prediction_pb2.py
 
 class Server (base.Base):
 	def __init__(self, port):
