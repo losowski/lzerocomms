@@ -3,7 +3,7 @@
 import logging
 import zmq
 
-from python.comms import base
+from lzerocomms import base
 
 # Publish - Subscribe (PUB-SUB)
 #
@@ -13,7 +13,7 @@ class Subscribe (base.Base):
 	def __init__(self, context, hostname, port):
 		super(Subscribe, self).__init__(context, hostname, port)
 		self.logger		=	logging.getLogger('Subscribe')
-		self.socket		=	self.context.socket(zmq.SUB)
+		self.socket		=	context.socket(zmq.SUB)
 
 
 	def __del__(self):

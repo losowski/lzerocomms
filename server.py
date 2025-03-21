@@ -3,7 +3,7 @@
 import logging
 import zmq
 
-from python.comms import base
+from lzerocomms import base
 
 # Request-Reply (REQ-REP, CLIENT-SERVER)
 #
@@ -15,7 +15,7 @@ class Server (base.Base):
 		self.logger			=	logging.getLogger('Server')
 			# GOTCHA: python-zmq 17.1.2-2 does not support CLIENT/SERVER
 		#	WORKAROUND:	REP
-		self.socket	=	self.context.socket(zmq.REP)
+		self.socket	=	context.socket(zmq.REP)
 
 
 	def __del__(self):

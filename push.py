@@ -3,7 +3,7 @@
 import logging
 import zmq
 
-from python.comms import base
+from lzerocomms import base
 
 # PIPELINE (PUSH-PULL)
 #
@@ -13,7 +13,7 @@ class Push (base.Base):
 	def __init__(self, context, hostname, port):
 		super(Push, self).__init__(context, hostname, port)
 		self.logger		=	logging.getLogger('Push')
-		self.socket		=	self.context.socket(zmq.PUSH)
+		self.socket		=	context.socket(zmq.PUSH)
 
 
 	def __del__(self):
