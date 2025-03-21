@@ -1,19 +1,18 @@
-# ZMQ Client Socket
+# ZMQ Push Socket
 
 import logging
 import zmq
 
 from python.comms import base
 
-# Request-Reply (REQ-REP, CLIENT-SERVER)
+# PIPELINE (PUSH-PULL)
 #
-#	Client connects to a known host
+#	Push to send data to pull clients
 #
-class Client (base.Base):
+class Push (base.Base):
 	def __init__(self, context, hostname, port):
 		super(Client, self).__init__(context, hostname, port)
-		self.logger			=	logging.getLogger('Client')
-		#Default connection as client
+		self.logger			=	logging.getLogger('Push')
 
 	def __del__(self):
 		super(Client, self).__del__()
@@ -23,9 +22,6 @@ class Client (base.Base):
 	def initialise(self):
 		super(Client, self).initialise()
 		# 1) Create socket
-		# GOTCHA: python-zmq 17.1.2-2 does not support CLIENT/SERVER
-		#	WORKAROUND:	REQ
-		self.socket	=	self.context.socket(zmq.REQ)
+		self.socket	=	self.context.socket(zmq.PUSH)
 		# 2) Connect the socket
 		self.socket.connect(self.connectionURL)
-	

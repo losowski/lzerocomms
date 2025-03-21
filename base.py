@@ -4,16 +4,17 @@ import logging
 import zmq
 
 class Base (object):
-	ConnectionURL =   "{protocol}://{hostname}:{port}"
+	cConnectionURL	=	"{protocol}://{hostname}:{port}"
+	cLocalHost		=	"localhost"
 
-	def __init__(self, hostname, port):
+	def __init__(self, context, hostname, port):
 		self.logger			=	logging.getLogger('Base')
 		#Default connection as client
 		self.protocol		=	'tcp'
 		self.hostname		=	hostname
 		self.port			=	port
-		self.connectionURL	=	Base.ConnectionURL.format(protocol = self.protocol, hostname = self.hostname, port = self.port)
-		self.context		=	zmq.Context()
+		self.connectionURL	=	Base.cConnectionURL.format(protocol = self.protocol, hostname = self.hostname, port = self.port)
+		self.context		=	context
 		self.socket			=	None
 		self.logger.info("Connection: %s", self.connectionURL)
 
@@ -23,22 +24,13 @@ class Base (object):
 		if (None != self.socket):
 			self.logger.info("Closing socket")
 			self.socket.close()
-		if (None != self.context):
-			self.logger.info("Closing Context")
-			self.context.term()
-			self.context.destroy()
 
 
-	# Setup the various components of the service
 	def initialise(self):
-		self.logger.info("Initialising the Service")
+		self.logger.info("Initialising")
 		# 1) Create socket
 		# 2) Connect the socket
 
-	# Start the service
-	def start(self):
-		self.logger.info("Starting the service")
-		# Implement this in the base class
 
 	# Send Data
 	def send(self, data):
