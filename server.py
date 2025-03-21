@@ -13,6 +13,9 @@ class Server (base.Base):
 	def __init__(self, context, port):
 		super(Server, self).__init__(context, base.Base.cLocalHost, port)
 		self.logger			=	logging.getLogger('Server')
+			# GOTCHA: python-zmq 17.1.2-2 does not support CLIENT/SERVER
+		#	WORKAROUND:	REP
+		self.socket	=	self.context.socket(zmq.REP)
 
 
 	def __del__(self):
@@ -22,9 +25,5 @@ class Server (base.Base):
 	# Setup the various components of the service
 	def initialise(self):
 		super(Server, self).initialise()
-		# 1) Create socket
-			# GOTCHA: python-zmq 17.1.2-2 does not support CLIENT/SERVER
-		#	WORKAROUND:	REP
-		self.socket	=	self.context.socket(zmq.REP)
-		# 2) Connect the socket
+		# Bind the socket
 		self.socket.bind(self.connectionURL)

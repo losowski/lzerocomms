@@ -3,6 +3,11 @@
 import logging
 import zmq
 
+
+# Create a context
+#
+#	context = zmq.Context()
+#
 class Base (object):
 	cConnectionURL	=	"{protocol}://{hostname}:{port}"
 	cLocalHost		=	"localhost"
@@ -11,12 +16,9 @@ class Base (object):
 		self.logger			=	logging.getLogger('Base')
 		#Default connection as client
 		self.protocol		=	'tcp'
-		self.hostname		=	hostname
-		self.port			=	port
-		self.connectionURL	=	Base.cConnectionURL.format(protocol = self.protocol, hostname = self.hostname, port = self.port)
-		self.context		=	context
-		self.socket			=	None
+		self.connectionURL	=	Base.cConnectionURL.format(protocol = self.protocol, hostname = hostname, port = port)
 		self.logger.info("Connection: %s", self.connectionURL)
+		self.socket			=	None
 
 
 	def __del__(self):

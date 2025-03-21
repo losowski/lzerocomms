@@ -11,8 +11,10 @@ from python.comms import base
 #
 class Publish (base.Base):
 	def __init__(self, context, port):
-		super(Client, self).__init__(context, base.Base.cLocalHost, port)
+		super(Publish, self).__init__(context, base.Base.cLocalHost, port)
 		self.logger			=	logging.getLogger('Publish')
+		self.socket	=	self.context.socket(zmq.PUB)
+
 
 	def __del__(self):
 		super(Client, self).__del__()
@@ -21,7 +23,5 @@ class Publish (base.Base):
 	# Setup the various components of the service
 	def initialise(self):
 		super(Client, self).initialise()
-		# 1) Create socket
-		self.socket	=	self.context.socket(zmq.PUB)
-		# 2) Connect the socket
-		self.socket.connect(self.connectionURL)
+		# Bind the socket
+		self.socket.bind(self.connectionURL)

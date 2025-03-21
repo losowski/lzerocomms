@@ -11,8 +11,9 @@ from python.comms import base
 #
 class Pull (base.Base):
 	def __init__(self, context, port):
-		super(Server, self).__init__(context, base.Base.cLocalHost, port)
-		self.logger			=	logging.getLogger('Pull')
+		super(Pull, self).__init__(context, base.Base.cLocalHost, port)
+		self.logger		=	logging.getLogger('Pull')
+		self.socket		=	self.context.socket(zmq.PULL)
 
 
 	def __del__(self):
@@ -22,7 +23,5 @@ class Pull (base.Base):
 	# Setup the various components of the service
 	def initialise(self):
 		super(Server, self).initialise()
-		# 1) Create socket
-		self.socket	=	self.context.socket(zmq.PULL)
-		# 2) Connect the socket
+		# Bind the socket
 		self.socket.bind(self.connectionURL)

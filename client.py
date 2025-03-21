@@ -12,8 +12,10 @@ from python.comms import base
 class Client (base.Base):
 	def __init__(self, context, hostname, port):
 		super(Client, self).__init__(context, hostname, port)
-		self.logger			=	logging.getLogger('Client')
-		#Default connection as client
+		self.logger		=	logging.getLogger('Client')
+		# GOTCHA: python-zmq 17.1.2-2 does not support CLIENT/SERVER
+		#	WORKAROUND:	REQ
+		self.socket		=	self.context.socket(zmq.REQ)
 
 	def __del__(self):
 		super(Client, self).__del__()
@@ -22,10 +24,5 @@ class Client (base.Base):
 	# Setup the various components of the service
 	def initialise(self):
 		super(Client, self).initialise()
-		# 1) Create socket
-		# GOTCHA: python-zmq 17.1.2-2 does not support CLIENT/SERVER
-		#	WORKAROUND:	REQ
-		self.socket	=	self.context.socket(zmq.REQ)
-		# 2) Connect the socket
+		# Connect the socket
 		self.socket.connect(self.connectionURL)
-	

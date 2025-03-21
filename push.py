@@ -11,8 +11,10 @@ from python.comms import base
 #
 class Push (base.Base):
 	def __init__(self, context, hostname, port):
-		super(Client, self).__init__(context, hostname, port)
-		self.logger			=	logging.getLogger('Push')
+		super(Push, self).__init__(context, hostname, port)
+		self.logger		=	logging.getLogger('Push')
+		self.socket		=	self.context.socket(zmq.PUSH)
+
 
 	def __del__(self):
 		super(Client, self).__del__()
@@ -21,7 +23,5 @@ class Push (base.Base):
 	# Setup the various components of the service
 	def initialise(self):
 		super(Client, self).initialise()
-		# 1) Create socket
-		self.socket	=	self.context.socket(zmq.PUSH)
-		# 2) Connect the socket
+		# Connect the socket
 		self.socket.connect(self.connectionURL)
