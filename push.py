@@ -17,11 +17,11 @@ class Push (base.Base):
 
 
 	def __del__(self):
-		super(Client, self).__del__()
+		super(Push, self).__del__()
 
 
 	# Setup the various components of the service
 	def initialise(self):
-		super(Client, self).initialise()
+		super(Push, self).initialise()
 		# Connect the socket
 		self.socket.connect(self.connectionURL)

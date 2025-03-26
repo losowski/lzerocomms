@@ -17,11 +17,11 @@ class Pull (base.Base):
 
 
 	def __del__(self):
-		super(Server, self).__del__()
+		super(Pull, self).__del__()
 
 
 	# Setup the various components of the service
 	def initialise(self):
-		super(Server, self).initialise()
+		super(Pull, self).initialise()
 		# Bind the socket
 		self.socket.bind(self.connectionURL)

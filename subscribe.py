@@ -17,11 +17,11 @@ class Subscribe (base.Base):
 
 
 	def __del__(self):
-		super(Server, self).__del__()
+		super(Subscribe, self).__del__()
 
 
 	# Setup the various components of the service
 	def initialise(self):
-		super(Server, self).initialise()
+		super(Subscribe, self).initialise()
 		# Connect the socket
 		self.socket.connect(self.connectionURL)

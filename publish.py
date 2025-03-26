@@ -17,11 +17,11 @@ class Publish (base.Base):
 
 
 	def __del__(self):
-		super(Client, self).__del__()
+		super(Publish, self).__del__()
 
 
 	# Setup the various components of the service
 	def initialise(self):
-		super(Client, self).initialise()
+		super(Publish, self).initialise()
 		# Bind the socket
 		self.socket.bind(self.connectionURL)
