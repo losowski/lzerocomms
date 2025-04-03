@@ -2,6 +2,7 @@
 
 import logging
 import zmq
+import struct # for packing integers
 
 from lzerocomms import base
 
@@ -25,3 +26,9 @@ class Publish (base.Base):
 		super(Publish, self).initialise()
 		# Bind the socket
 		self.socket.bind(self.connectionURL)
+
+	# Send Data
+	def send(self, listOfData):
+		self.logger.debug("Sending (%s) under topic\"%s\"", data, topic)
+		etData = self.socket.send_multipart(listOfData)
+
