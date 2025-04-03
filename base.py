@@ -35,9 +35,9 @@ class Base (object):
 
 
 	# Send Data
-	def send(self, data):
+	def send(self, data, flags = 0):
 		self.logger.debug("Sending (%s)....", data)
-		self.socket.send(data)
+		self.socket.send(data, flags)
 
 	# Receive Data
 	def receive(self):

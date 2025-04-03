@@ -25,3 +25,12 @@ class Subscribe (base.Base):
 		super(Subscribe, self).initialise()
 		# Connect the socket
 		self.socket.connect(self.connectionURL)
+
+	# Socket Options
+	def subscribe(self, topic = ""):
+		self.socket.setsockopt(zmq.SUBSCRIBE, topic)
+
+
+	def receive(self):
+		retData = self.socket.recv_multipart()
+		return retData
